@@ -18,7 +18,8 @@
     "prisma:validate": "npx prisma validate",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down -v",
-    "health": "node scripts/healthcheck.cjs"
+    "health": "node scripts/healthcheck.cjs",
+    "gate:phase1": "node scripts/gate-phase1.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
@@ -71,7 +72,16 @@
       "environment": "node"
     },
     "coverage": {
-      "provider": "v8"
+      "provider": "v8",
+      "exclude": [
+        "scripts/**"
+      ],
+      "thresholds": {
+        "lines": 80,
+        "branches": 70,
+        "functions": 80,
+        "statements": 80
+      }
     },
     "globals": true
   },
