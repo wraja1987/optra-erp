@@ -1,0 +1,83 @@
+{
+  "name": "v5-ultra-erp",
+  "private": true,
+  "packageManager": "pnpm@9.8.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.base.json --noEmit",
+    "test": "vitest run --reporter=dot",
+    "cov": "vitest run --coverage --reporter=dot",
+    "a11y": "echo 'axe-core placeholder'",
+    "sbom": "npx --yes cyclonedx-bom -o sbom.xml || echo 'sbom stub'",
+    "gate:phase0": "node scripts/gate-phase0.cjs",
+    "prisma:generate": "npx prisma generate",
+    "prisma:validate": "npx prisma validate",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down -v",
+    "health": "node scripts/healthcheck.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^48.3.0",
+    "eslint-plugin-n": "^17.9.0",
+    "eslint-plugin-promise": "^6.4.0",
+    "prettier": "^3.3.3",
+    "prisma": "^6.14.0",
+    "typescript": "^5.5.4",
+    "vitest": "3.2.4",
+    "zod": "^3.23.8"
+  },
+  "eslintConfig": {
+    "env": {
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:promise/recommended",
+      "plugin:n/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "script"
+    },
+    "ignorePatterns": [
+      "node_modules/",
+      "dist/",
+      "sbom.xml"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.test.js"
+        ],
+        "parserOptions": {
+          "sourceType": "module"
+        }
+      }
+    ]
+  },
+  "vitest": {
+    "test": {
+      "environment": "node"
+    },
+    "coverage": {
+      "provider": "v8"
+    },
+    "globals": true
+  },
+  "dependencies": {
+    "@prisma/client": "^6.14.0",
+    "pg": "^8.16.3",
+    "redis": "^5.8.1"
+  }
+}
