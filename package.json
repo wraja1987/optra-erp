@@ -19,7 +19,8 @@
     "db:up": "docker compose up -d",
     "db:down": "docker compose down -v",
     "health": "node scripts/healthcheck.cjs",
-    "gate:phase1": "node scripts/gate-phase1.cjs"
+    "gate:phase1": "node scripts/gate-phase1.cjs",
+    "gate:phase2": "node scripts/gates/phase2.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
@@ -54,7 +55,8 @@
     "ignorePatterns": [
       "node_modules/",
       "dist/",
-      "sbom.xml"
+      "sbom.xml",
+      "apps/**"
     ],
     "overrides": [
       {

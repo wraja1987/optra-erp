@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Minimal subset to satisfy gates; all with tenant_id
+model Warehouse { id String @id @default(cuid()) tenant_id String name String @@index([tenant_id]) }
+model Bin { id String @id @default(cuid()) tenant_id String warehouseId String code String class String @@index([tenant_id, warehouseId]) }
+model Item { id String @id @default(cuid()) tenant_id String sku String name String @@unique([tenant_id, sku]) }
+model Lot { id String @id @default(cuid()) tenant_id String itemId String lotCode String expiry DateTime @@index([tenant_id, itemId, expiry]) }
+model StockMove { id String @id @default(cuid()) tenant_id String itemId String fromBinId String? toBinId String? qty Decimal createdAt DateTime @default(now()) @@index([tenant_id, itemId]) }
+
+model Bom { id String @id @default(cuid()) tenant_id String itemId String rev String active Boolean }
+model WorkOrder { id String @id @default(cuid()) tenant_id String itemId String qty Decimal status String hold Boolean default false leadTimeDays Int default 5 }
+
+model Account { id String @id @default(cuid()) tenant_id String name String }
+model Quote { id String @id @default(cuid()) tenant_id String accountId String total Decimal discount Decimal approved Boolean default false needsApproval Boolean default false }
+model Contract { id String @id @default(cuid()) tenant_id String quoteId String evidenceHash String? activatedAt DateTime? }
+
+model Project { id String @id @default(cuid()) tenant_id String name String }
+model Milestone { id String @id @default(cuid()) tenant_id String projectId String amount Decimal billed Boolean default false }
+
+model Report { id String @id @default(cuid()) tenant_id String name String }
+model SignedLink { id String @id @default(cuid()) tenant_id String reportId String token String expiresAt DateTime used Boolean default false @@index([tenant_id, token]) }
