@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BomVersion { id String @id @default(cuid()) tenant_id String itemId String version String effectiveFrom DateTime effectiveTo DateTime? @@index([tenant_id, itemId, version]) }
+model BomItem { id String @id @default(cuid()) tenant_id String bomVersionId String componentId String qty Decimal @@index([tenant_id, bomVersionId]) }
+model Eco { id String @id @default(cuid()) tenant_id String bomVersionId String status String createdAt DateTime @default(now()) }
+model SupplierScore { id String @id @default(cuid()) tenant_id String supplierId String score Int updatedAt DateTime @updatedAt }
+model Checklist { id String @id @default(cuid()) tenant_id String jobId String status String signedBy String? signedAt DateTime? offline Boolean default false }
+model ReportJob { id String @id @default(cuid()) tenant_id String reportId String status String retries Int default 0 nextRun DateTime }
+model OAuthScope { id String @id @default(cuid()) tenant_id String appId String scope String @@index([tenant_id, appId]) }
+model WebhookEvent { id String @id @default(cuid()) tenant_id String event String payload Json hmac String nonce String createdAt DateTime @default(now()) @@index([tenant_id, nonce]) }

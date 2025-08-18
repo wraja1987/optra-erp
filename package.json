@@ -20,7 +20,10 @@
     "db:down": "docker compose down -v",
     "health": "node scripts/healthcheck.cjs",
     "gate:phase1": "node scripts/gate-phase1.cjs",
-    "gate:phase2": "node scripts/gates/phase2.cjs"
+    "gate:phase2": "node scripts/gates/phase2.cjs",
+    "gate:phase3": "node scripts/gates/phase3.cjs",
+    "gates": "pnpm run gate:phase0 && pnpm run gate:phase1 && pnpm run gate:phase2 && pnpm run gate:phase3 && pnpm run gate:phase4",
+    "gate:phase4": "node scripts/gates/phase4.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",

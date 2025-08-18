@@ -1,0 +1,13 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model App { id String @id @default(cuid()) tenant_id String name String installed Boolean default false @@index([tenant_id]) }
+model Plan { id String @id @default(cuid()) tenant_id String name String price Decimal }
+model UsageQuota { id String @id @default(cuid()) tenant_id String quota Int used Int default 0 period String }
+model AppLog { id String @id @default(cuid()) tenant_id String appId String level String message String createdAt DateTime @default(now()) @@index([tenant_id, appId]) }
