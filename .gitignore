@@ -1,1 +1,11 @@
-.env
+node_modules/
+.pnpm-*/
+pnpm-store/
+dist/
+build/
+coverage/
+.vite/
+.turbo/
+.env*
+.DS_Store
+*.log
