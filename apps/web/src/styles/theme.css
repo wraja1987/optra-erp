@@ -1,0 +1,118 @@
+:root{
+  --nf-bg:#F9FAFB;
+  --nf-text:#0F172A;
+  --nf-muted:#6B7280;
+  --nf-blue:#2563EB;
+  --nf-teal:#14B8A6;
+  --nf-purple:#7C3AED;
+  --nf-card-radius:12px;
+  --nf-card-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+html,body{background:var(--nf-bg); color:var(--nf-text);}
+.card{border-radius:var(--nf-card-radius); box-shadow:var(--nf-card-shadow); background:#fff;}
+.muted{color:var(--nf-muted);}
+/* Neo-Fluid Intelligence Theme */
+
+/* Fluid gradient background */
+.bg-fluid {
+  background: linear-gradient(120deg, #2563EB, #7C3AED, #14B8A6);
+  background-size: 200% 200%;
+  animation: fluidGradient 8s ease infinite;
+}
+@keyframes fluidGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* AI-specific styles */
+.ai-chip {
+  background: #14B8A6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(20,184,166,0.7);
+}
+.alert-ai-green { box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+.alert-ai-yellow { box-shadow: 0 0 8px rgba(234,179,8,0.6); }
+.alert-ai-red { box-shadow: 0 0 8px rgba(239,68,68,0.6); }
+
+/* Typography */
+h1,h2,h3,h4,h5 {
+  font-family: 'Inter','Segoe UI','SF Pro',sans-serif;
+  font-weight: 600;
+}
+body,p,span,div {
+  font-family: 'Inter','Segoe UI','SF Pro',sans-serif;
+  font-weight: 400;
+}
+code,.number {
+  font-family: 'Roboto Mono', monospace;
+}
+
+html.dark{
+  --nf-bg:#0F172A;
+  --nf-text:#F9FAFB;
+  --nf-muted:#CBD5E1;
+}
+
+/* Cards & Buttons */
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.08); padding:16px; }
+.btn-primary {
+  background: var(--nf-blue);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { filter: brightness(0.95); }
+
+/* AI Confirmation Card glow */
+.ai-confirm { box-shadow: 0 0 0 2px rgba(20,184,166,.35), 0 0 12px rgba(20,184,166,.45); border-radius:12px; }
+
+/* Muted text */
+.text-muted { color: var(--nf-muted); }
+
+/* -------- Neo‑Fluid: Dark mode polish -------- */
+html, body { transition: background-color .2s ease, color .2s ease; }
+
+/* Stronger, even palette in dark */
+html.dark{
+  --nf-bg:#0B1220;        /* deep blue-black background */
+  --nf-text:#E5E7EB;      /* light text */
+  --nf-muted:#9CA3AF;     /* softer text */
+}
+
+/* Cards and surfaces */
+html.dark .card{
+  background:#0F172A;                             /* deep navy card */
+  color:var(--nf-text);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,255,255,.06) inset;        /* subtle outline for definition */
+}
+
+/* Ensure text inside cards isn’t washed out */
+.card h1, .card h2, .card h3, .card p { color: var(--nf-text); }
+.text-muted { color: var(--nf-muted); }
+
+/* Buttons */
+html.dark .btn-primary{
+  background: var(--nf-blue);
+  color:#fff;
+}
+
+/* AI confirmation glow (a touch stronger so it reads on dark) */
+html.dark .ai-confirm{
+  box-shadow:
+    0 0 0 2px rgba(20,184,166,.55),
+    0 0 18px rgba(20,184,166,.35);
+}
+
+/* Gradient header subtle outline so it doesn’t bleed into bg */
+html.dark .bg-fluid{
+  border: 1px solid rgba(255,255,255,.06);
+}
