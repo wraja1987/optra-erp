@@ -75,6 +75,17 @@ model AuditLog {
   createdAt  DateTime @default(now())
 }
 
+model PasswordReset {
+  id         Int      @id @default(autoincrement())
+  email      String
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  used       Boolean  @default(false)
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+}
+
 /**
  * * Master Data **
  */
@@ -194,4 +205,64 @@ model StaffMember {
   taxCode  String
 
   @@map("Employee")
+}
+
+// Help & Docs
+model HelpGuide {
+  id     Int    @id @default(autoincrement())
+  role   String
+  title  String
+  body   String
+}
+
+model HelpFAQ {
+  id     Int    @id @default(autoincrement())
+  question String
+  answer   String
+}
+
+model HelpGlossary {
+  id     Int    @id @default(autoincrement())
+  term   String @unique
+  definition String
+}
+
+model HelpReleaseNote {
+  id     Int    @id @default(autoincrement())
+  version String
+  notes   String
+  date    DateTime @default(now())
+}
+
+model HelpVideoStub {
+  id     Int    @id @default(autoincrement())
+  title  String
+  url    String
+}
+
+model SupportMessage {
+  id        Int      @id @default(autoincrement())
+  email     String
+  role      String?
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+  status    String   @default("OPEN")
+}
+
+// Finance extras
+model Budget {
+  id        Int      @id @default(autoincrement())
+  orgId     Int
+  period    String
+  account   String
+  amount    Float
+}
+
+model FXRate {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  base      String
+  ccy       String
+  rate      Float
 }
