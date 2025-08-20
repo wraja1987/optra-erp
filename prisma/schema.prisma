@@ -124,7 +124,38 @@ model ClientAccount {
   email         String               @unique
   subscriptions ActiveSubscription[]
 
+  // Accounts extensions
+  customerNumber       String?   @unique
+  type                 String?   // Company | Individual
+  segment              String?   // Enterprise | Mid-market | SMB
+  status               String?   // Active | Inactive | On Hold
+  owner                String?
+  primaryContact       String?
+  phone                String?
+  balance              Float     @default(0)
+  creditLimit          Float     @default(0)
+  creditRisk           String?   // Low | Medium | High
+  paymentTerms         String?   // 7/14/30/60/Custom
+  lastOrderDate        DateTime?
+  totalOrders          Int       @default(0)
+  countryRegion        String?
+  tags                 String?
+  defaultCurrency      String?   // e.g. GBP/EUR/USD
+  priceList            String?
+  vatNumber            String?
+  daysPastDue          Int       @default(0)
+  lastPaymentDate      DateTime?
+  statementAgeBucket   String?   // 0–30, 31–60, 61–90, 90+
+  preferredContactMethod String? // Email/Phone/None
+  marketingConsent     Boolean   @default(false)
+  creditHoldReason     String?
+
   @@map("Customer")
+  @@index([status])
+  @@index([segment])
+  @@index([creditLimit])
+  @@index([balance])
+  @@index([lastOrderDate])
 }
 
 model SubscriptionPlan {

@@ -20,6 +20,10 @@ function fail(s,e){ console.error(`FAIL: ${s}: ${e?.message||e}`); process.exitC
     const gl = await prisma.helpGlossary.count();
     if (g < 15 || faq < 10 || gl < 30) throw new Error('helpdocs seeds insufficient');
     ok('HelpDocs seeded');
+    // Customers rules
+    const anyCust = await prisma.clientAccount.count();
+    if (anyCust < 3) throw new Error('customers seed missing');
+    ok('Customers seeded');
     await prisma.$disconnect();
 
   }catch(e){ fail('Phase2 gate', e); }

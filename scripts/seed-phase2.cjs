@@ -24,6 +24,39 @@ const prisma = new PrismaClient();
   const sm = await prisma.supportMessage.count();
   if (sm === 0) await prisma.supportMessage.create({ data:{ email:'user@example.com', role:'Standard', subject:'Test', message:'Hello support' } });
 
+  // Customers demo
+  const custCount = await prisma.clientAccount.count();
+  if (custCount < 10) {
+    await prisma.clientAccount.createMany({ data: Array.from({length:10}).map((_,i)=>({
+      name: i%2? 'Acme Ltd' : 'Globex Corp',
+      email: `customer${i+1}@example.com`,
+      customerNumber: `CUST-${1000+i}`,
+      type: i%3? 'Company':'Individual',
+      segment: i%4===0? 'Enterprise' : i%4===1? 'Mid-market' : 'SMB',
+      status: i%5===0? 'On Hold' : 'Active',
+      owner: 'ops',
+      primaryContact: i%2? 'Jane Doe' : 'John Smith',
+      phone: '+1 555 0100',
+      balance: 1000 + i*250,
+      creditLimit: 2000 + i*300,
+      creditRisk: i%3===0? 'High' : i%3===1? 'Medium' : 'Low',
+      paymentTerms: '30',
+      lastOrderDate: new Date(Date.now()-86400000*(i%20)),
+      totalOrders: 5 + i,
+      countryRegion: i%2? 'UK':'US',
+      tags: 'vip,onboarding',
+      defaultCurrency: i%2? 'GBP':'USD',
+      priceList: 'STANDARD',
+      vatNumber: i%2? 'GB123456789':'US00-000',
+      daysPastDue: i%4===0? 45 : 0,
+      lastPaymentDate: new Date(Date.now()-86400000*(i%15)),
+      statementAgeBucket: i%4===0? '31–60' : '0–30',
+      preferredContactMethod: i%2? 'Email':'Phone',
+      marketingConsent: i%2===0,
+      creditHoldReason: i%5===0? 'Over limit' : null,
+    }) ) });
+  }
+
   // Budgets sample
   const b = await prisma.budget.count();
   if (b < 3) await prisma.budget.createMany({ data:[
