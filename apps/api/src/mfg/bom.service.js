@@ -1,3 +1,30 @@
+function effectiveBom(versions = [], itemId, onDate) {
+  const date = new Date(onDate || Date.now());
+  const filtered = versions.filter(v => v.itemId === itemId && new Date(v.effectiveFrom) <= date);
+  filtered.sort((a, b) => new Date(a.effectiveFrom) - new Date(b.effectiveFrom));
+  return filtered[filtered.length - 1] || null;
+}
+
+function expandBom(components = [], rootVersionId) {
+  const result = [];
+  const visited = new Set();
+  function walk(versionId) {
+    const rows = components.filter(c => c.bomVersionId === versionId);
+    for (const row of rows) {
+      const key = `${row.componentId}`;
+      if (!visited.has(key)) {
+        visited.add(key);
+        result.push({ componentId: row.componentId, qty: row.qty });
+      }
+      if (row.subVersionId) walk(row.subVersionId);
+    }
+  }
+  walk(rootVersionId);
+  return result;
+}
+
+module.exports = { effectiveBom, expandBom };
+
 function expandBom(boms, rootVersionId) {
   const items = [];
   function dfs(versionId, factor) {

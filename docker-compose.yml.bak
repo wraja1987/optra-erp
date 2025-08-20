@@ -1,38 +1,24 @@
-version: '3.9'
 services:
-  postgres:
+  db:
     image: postgres:15
-    container_name: v5-postgres
-    restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
-      POSTGRES_DB: ${POSTGRES_DB:-v5}
+      POSTGRES_USER: v5ultra
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: v5ultra
     ports:
       - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-v5}"]
+      test: ["CMD-SHELL", "pg_isready -U v5ultra"]
       interval: 5s
       timeout: 5s
-      retries: 20
-      start_period: 10s
+      retries: 10
+
   redis:
     image: redis:7
-    container_name: v5-redis
-    restart: unless-stopped
     ports:
       - "6379:6379"
-    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
-    volumes:
-      - redisdata:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
-      timeout: 5s
-      retries: 20
-      start_period: 5s
-volumes:
-  pgdata:
-  redisdata:
+      timeout: 3s
+      retries: 10

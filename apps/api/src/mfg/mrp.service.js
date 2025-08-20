@@ -1,3 +1,13 @@
+function planMRP(scheduledReceipts = [], demands = [], onHandLookup = {}) {
+  const totalDemand = demands.reduce((s, d) => s + Number(d.qty || 0), 0);
+  const totalReceipts = scheduledReceipts.reduce((s, r) => s + Number(r.qty || 0), 0);
+  const plannedQty = Math.max(0, totalDemand - totalReceipts);
+  const first = demands[0] || {};
+  return plannedQty > 0 ? [{ itemId: first.itemId, plannedQty, due: first.needBy || null }] : [];
+}
+
+module.exports = { planMRP };
+
 function planMRP(onHand, demand, leadDays) {
   const onHandMap = new Map(onHand.map(o=>[o.itemId, o.qty]));
   const plans = [];

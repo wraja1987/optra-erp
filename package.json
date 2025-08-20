@@ -1,5 +1,5 @@
 {
-  "name": "v5-ultra-erp",
+  "name": "optra-erp",
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "workspaces": [
@@ -16,7 +16,11 @@
     "gate:phase0": "node scripts/gate-phase0.cjs",
     "prisma:generate": "npx prisma generate",
     "prisma:validate": "npx prisma validate",
-    "db:up": "docker compose up -d",
+    "db:up": "docker compose up -d db redis || docker-compose up -d db redis",
+    "db:init": "bash scripts/db-init.sh",
+    "db:migrate": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "db:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "seed:phase1": "tsx apps/api/scripts/seed-phase1.ts",
     "db:down": "docker compose down -v",
     "health": "node -r dotenv/config scripts/healthcheck.cjs",
     "gate:phase1": "node scripts/gate-phase1.cjs",
@@ -25,7 +29,12 @@
     "gate:phase4": "node scripts/gates/phase4.cjs",
     "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4",
     "web": "npm --workspace apps/web run dev",
-    "check": "npm run health && npm run gates:all"
+    "check": "npm run health && npm run gates:all",
+    "dev:mobile": "pnpm -F @v5-ultra/mobile exec expo start",
+    "db:seed": "node scripts/seed.cjs",
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
@@ -38,6 +47,7 @@
     "eslint-plugin-promise": "^6.4.0",
     "prettier": "^3.3.3",
     "prisma": "^6.14.0",
+    "tsx": "^4.20.4",
     "typescript": "^5.5.4",
     "vitest": "3.2.4",
     "zod": "^3.23.8"

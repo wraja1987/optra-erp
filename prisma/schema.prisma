@@ -3,23 +3,195 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Tenant {
-  id        String  @id @default(cuid())
+
+
+
+
+
+/**
+ * * System & Administration **
+ */
+model WorkspaceUnit {
+  id        String   @id @default(cuid())
+  code      String   @unique
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("Tenant")
 }
 
-model User {
-  id        String  @id @default(cuid())
+model ERPUser {
+  id        String   @id @default(cuid())
   tenant_id String
-  email     String  @unique
+  email     String   @unique
   role      String
+  passwordHash String?
+  immutable    Boolean  @default(false)
+  status       String   @default("ACTIVE")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
   @@index([tenant_id])
+  @@map("User")
+}
+
+// RBAC
+model Role {
+  id      Int     @id @default(autoincrement())
+  key     String  @unique
+  name    String
+  system  Boolean @default(false)
+}
+
+model UserRole {
+  userId   String
+  roleId   Int
+  tenantId String?
+
+  @@id([userId, roleId])
+}
+
+// SoD
+model SodPolicy {
+  id          Int     @id @default(autoincrement())
+  key         String  @unique
+  description String?
+  active      Boolean @default(true)
+}
+
+// Audit
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  actorEmail String
+  role       String?
+  action     String
+  details    String?
+  createdAt  DateTime @default(now())
+}
+
+/**
+ * * Master Data **
+ */
+model Organization {
+  id           Int    @id @default(autoincrement())
+  code         String @unique
+  name         String
+  baseCurrency String
+
+  @@map("Company")
+}
+
+model DistributionCenter {
+  id        Int                @id @default(autoincrement())
+  code      String             @unique
+  name      String
+  inventory CurrentInventory[]
+  pickWaves FulfillmentWave[]
+
+  @@map("Warehouse")
+}
+
+model ProductSKU {
+  id        Int                @id @default(autoincrement())
+  code      String             @map("sku")
+  name      String
+  uom       String
+  inventory CurrentInventory[]
+
+  @@map("Item")
+}
+
+model ClientAccount {
+  id            Int                  @id @default(autoincrement())
+  name          String
+  email         String               @unique
+  subscriptions ActiveSubscription[]
+
+  @@map("Customer")
+}
+
+model SubscriptionPlan {
+  id            Int                  @id @default(autoincrement())
+  code          String               @unique
+  name          String
+  priceMonthly  Int
+  currency      String
+  subscriptions ActiveSubscription[]
+
+  @@map("SubscriptionPlan")
+}
+
+/**
+ * * Transactions & Operations **
+ */
+model ActiveSubscription {
+  id         Int              @id @default(autoincrement())
+  customerId Int
+  planId     Int
+  status     String
+  startDate  DateTime
+  customer   ClientAccount    @relation(fields: [customerId], references: [id])
+  plan       SubscriptionPlan @relation(fields: [planId], references: [id])
+
+  @@unique([customerId, planId], name: "customerId_planId")
+  @@map("Subscription")
+}
+
+model CurrentInventory {
+  id                   Int                @id @default(autoincrement())
+  distributionCenterId Int                @map("warehouseId")
+  productSKUId         Int                @map("itemId")
+  quantity             Int                @map("qty")
+  distributionCenter   DistributionCenter @relation(fields: [distributionCenterId], references: [id])
+  productSKU           ProductSKU         @relation(fields: [productSKUId], references: [id])
+
+  @@unique([distributionCenterId, productSKUId], name: "warehouseId_itemId")
+  @@map("InventoryOnHand")
+}
+
+model FulfillmentWave {
+  id                   Int                @id @default(autoincrement())
+  distributionCenterId Int                @map("warehouseId")
+  waveCode             String             @map("status")
+  distributionCenter   DistributionCenter @relation(fields: [distributionCenterId], references: [id])
+
+  @@map("PickWave")
+}
+
+model ProjectEngagement {
+  id         Int            @id @default(autoincrement())
+  code       String         @unique
+  title      String         @map("name")
+  billMethod String
+  timesheets WorkHoursLog[]
+
+  @@map("Project")
+}
+
+model WorkHoursLog {
+  id           Int               @id @default(autoincrement())
+  projectId    Int
+  employeeName String
+  date         DateTime
+  hours        Float
+  rate         Float
+  project      ProjectEngagement @relation(fields: [projectId], references: [id])
+
+  @@map("Timesheet")
+}
+
+model StaffMember {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  niLetter String
+  taxCode  String
+
+  @@map("Employee")
 }

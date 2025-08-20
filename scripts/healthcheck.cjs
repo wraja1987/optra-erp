@@ -2,7 +2,7 @@ const { Client } = require('pg');
 require('dotenv').config();
 
 (async () => {
-  const url = process.env.DATABASE_URL || 'postgresql://app:app@127.0.0.1:5432/v5';
+  const url = process.env.DATABASE_URL || 'postgresql://v5ultra:password@127.0.0.1:5432/v5ultra';
   try {
     const client = new Client({ connectionString: url });
     await client.connect();

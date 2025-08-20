@@ -1,0 +1,104 @@
+// ------------------------------
+// Optra ERP Schema (Readable)
+// ------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("Company")
+}
+
+model ClientAccount {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("Customer")
+}
+
+model StaffMember {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("Employee")
+}
+
+model ProductSKU {
+  id   Int    @id @default(autoincrement())
+  code String
+
+  @@map("Item")
+}
+
+model DistributionCenter {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("Warehouse")
+}
+
+model SubscriptionPlan {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("SubscriptionPlan")
+}
+
+model ProjectEngagement {
+  id    Int    @id @default(autoincrement())
+  title String
+
+  @@map("Project")
+}
+
+model WorkHoursLog {
+  id    Int @id @default(autoincrement())
+  hours Int
+  rate  Int
+
+  @@map("Timesheet")
+}
+
+model ActiveSubscription {
+  id     Int    @id @default(autoincrement())
+  status String
+
+  @@map("Subscription")
+}
+
+model CurrentInventory {
+  id       Int @id @default(autoincrement())
+  quantity Int
+
+  @@map("InventoryOnHand")
+}
+
+model FulfillmentWave {
+  id       Int    @id @default(autoincrement())
+  waveCode String
+
+  @@map("PickWave")
+}
+
+model ERPUser {
+  id    Int    @id @default(autoincrement())
+  email String
+
+  @@map("User")
+}
+
+model WorkspaceUnit {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map("Tenant")
+}

@@ -1,8 +1,14 @@
-const crypto = require('node:crypto');
-function createSignedLink(reportId, ttlSeconds) {
-  const token = crypto.randomBytes(16).toString('hex');
-  const expiresAt = Math.floor(Date.now()/1000) + ttlSeconds;
-  return { token, expiresAt };
+const crypto = require('crypto');
+
+function createSignedLink(reportId, ttlMinutes) {
+  const now = Math.floor(Date.now() / 1000);
+  const expiresAt = now + Number(ttlMinutes) * 60;
+  const token = crypto.randomBytes(8).toString('hex');
+  return { reportId, token, expiresAt };
 }
-function isLinkValid(link, nowSec) { return nowSec <= link.expiresAt; }
+
+function isLinkValid(link, nowEpochSeconds) {
+  return (nowEpochSeconds || Math.floor(Date.now() / 1000)) < link.expiresAt;
+}
+
 module.exports = { createSignedLink, isLinkValid };

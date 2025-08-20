@@ -1,4 +1,4 @@
-# V5 Ultra ERP
+# Optra ERP
 
 Phase 0 scaffold for the Final Patched+++ benchmark.
 

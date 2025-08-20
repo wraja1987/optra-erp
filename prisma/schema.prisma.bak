@@ -1,0 +1,124 @@
+cat > prisma/schema.prisma <<'PRISMA_EOF'
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id         String   @id @default(cuid())
+  tenant_id  String
+  email      String   @unique
+  role       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([tenant_id])
+}
+
+model Company {
+  id           Int    @id @default(autoincrement())
+  code         String @unique
+  name         String
+  baseCurrency String
+}
+
+model Warehouse {
+  id        Int               @id @default(autoincrement())
+  code      String            @unique
+  name      String
+  inventory InventoryOnHand[]
+  pickWaves PickWave[]
+}
+
+model Item {
+  id        Int               @id @default(autoincrement())
+  sku       String            @unique
+  name      String
+  uom       String
+  inventory InventoryOnHand[]
+}
+
+model InventoryOnHand {
+  id           Int        @id @default(autoincrement())
+  warehouseId  Int
+  itemId       Int
+  qty          Int
+  warehouse    Warehouse  @relation(fields: [warehouseId], references: [id])
+  item         Item       @relation(fields: [itemId], references: [id])
+
+  @@unique([warehouseId, itemId], name: "warehouseId_itemId")
+}
+
+model Customer {
+  id            Int             @id @default(autoincrement())
+  name          String
+  email         String          @unique
+  subscriptions Subscription[]
+}
+
+model SubscriptionPlan {
+  id            Int             @id @default(autoincrement())
+  code          String          @unique
+  name          String
+  priceMonthly  Int
+  currency      String
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id         Int               @id @default(autoincrement())
+  customerId Int
+  planId     Int
+  status     String
+  startDate  DateTime
+  customer   Customer          @relation(fields: [customerId], references: [id])
+  plan       SubscriptionPlan  @relation(fields: [planId], references: [id])
+
+  @@unique([customerId, planId], name: "customerId_planId")
+}
+
+model Project {
+  id         Int         @id @default(autoincrement())
+  code       String      @unique
+  name       String
+  billMethod String
+  timesheets Timesheet[]
+}
+
+model Timesheet {
+  id           Int      @id @default(autoincrement())
+  projectId    Int
+  employeeName String
+  date         DateTime
+  hours        Float
+  rate         Float
+  project      Project  @relation(fields: [projectId], references: [id])
+}
+
+model Employee {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  niLetter String
+  taxCode  String
+}
+
+model PickWave {
+  id          Int        @id @default(autoincrement())
+  warehouseId Int
+  status      String
+  warehouse   Warehouse  @relation(fields: [warehouseId], references: [id])
+}
+PRISMA_EOF
