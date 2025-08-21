@@ -283,20 +283,19 @@ model SupportMessage {
 
 /// AI Opportunities (Phase 3)
 model Opportunity {
-  id          Int      @id @default(autoincrement())
-  slug        String   @unique
-  title       String
-  category    String   // Module | Integration | Feature
-  valueScore  Int
-  effort      String   // S | M | L
-  risk        String?
-  sources     Json?
-  createdAt   DateTime @default(now())
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  category   String?
+  valueScore Int?
+  riskLevel  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model OpportunityPlan {
   id            Int      @id @default(autoincrement())
-  opportunityId Int
+  opportunityId String
   summary       String
   steps         Json?
   risks         Json?
@@ -305,12 +304,12 @@ model OpportunityPlan {
 }
 
 model OpportunityDecision {
-  id            Int      @id @default(autoincrement())
-  opportunityId Int
-  decision      String   // accepted | rejected
-  reason        String?
+  id              Int      @id @default(autoincrement())
+  opportunityId   String
+  decision        String   // accepted | rejected
+  reason          String?
   decidedByUserId String
-  decidedAt     DateTime @default(now())
+  decidedAt       DateTime @default(now())
 }
 
 // Finance extras

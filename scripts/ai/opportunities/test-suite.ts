@@ -1,35 +1,59 @@
-/* eslint-disable no-console */
-import 'dotenv/config';
-import fetch from 'node-fetch';
+import http from 'node:http';
 
-async function expectOk(res: Response, msg: string) {
-  if (!res.ok) {
-    const t = await res.text();
-    console.error(msg, t);
-    process.exit(1);
-  }
+function req(method: string, path: string, body?: any, cookie?: string): Promise<{status:number, text:string}> {
+  return new Promise((resolve, reject) => {
+    const data = body ? Buffer.from(JSON.stringify(body)) : undefined;
+    const req = http.request(
+      { host: '127.0.0.1', port: 3000, path, method,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(cookie ? { Cookie: cookie } : {}),
+          ...(data ? { 'Content-Length': data.length } : {}),
+        } },
+      res => {
+        let chunks: Buffer[] = [];
+        res.on('data', c => chunks.push(c));
+        res.on('end', () => resolve({ status: res.statusCode || 0, text: Buffer.concat(chunks).toString('utf8') }));
+      }
+    );
+    req.on('error', reject);
+    if (data) req.write(data);
+    req.end();
+  });
 }
 
-async function main() {
-  const headers = { cookie: 'role=SUPERADMIN' } as any;
-  let res = await fetch('http://localhost:3000/api/ai/opportunities');
-  if (res.status !== 403) { console.error('Expected 403 without cookie'); process.exit(1); }
-  res = await fetch('http://localhost:3000/api/ai/opportunities', { headers });
-  await expectOk(res, 'List failed');
-  const list = await res.json() as any;
-  if (!Array.isArray(list.items)) { console.error('List invalid'); process.exit(1); }
-  if (!list.items.length) { console.warn('No items; run refresh first'); }
-  const id = list.items[0]?.id || 1;
-  res = await fetch(`http://localhost:3000/api/ai/opportunities/${id}/plan`, { method:'POST', headers });
-  await expectOk(res, 'Plan failed');
-  const plan = await res.json() as any;
-  res = await fetch(`http://localhost:3000/api/ai/opportunities/${id}/accept`, { method:'POST', headers, body: JSON.stringify({ plan: plan.plan }), 
-    // @ts-ignore
-    headers: { ...headers, 'Content-Type': 'application/json' } });
-  await expectOk(res, 'Accept failed');
-  console.log('AI opportunities test suite OK');
+async function expect(status: number, got: number, label: string) {
+  if (got !== status) throw new Error(`${label}: expected ${status}, got ${got}`);
 }
 
-main();
+(async () => {
+  // Negative flow (no cookie): should 403
+  const negList = await req('GET', '/api/ai/opportunities');
+  await expect(403, negList.status, 'list without cookie');
 
+  const negRefresh = await req('POST', '/api/ai/opportunities/refresh');
+  await expect(403, negRefresh.status, 'refresh without cookie');
 
+  // Positive flow (Super Admin cookie)
+  const cookie = 'role=SUPERADMIN';
+
+  const refresh = await req('POST', '/api/ai/opportunities/refresh', {}, cookie);
+  await expect(200, refresh.status, 'refresh with superadmin');
+
+  const list = await req('GET', '/api/ai/opportunities', undefined, cookie);
+  await expect(200, list.status, 'list with superadmin');
+
+  const plan = await req('POST', '/api/ai/opportunities/plan', { id: 'demo-1' }, cookie);
+  await expect(200, plan.status, 'plan with superadmin');
+
+  const accept = await req('POST', '/api/ai/opportunities/accept', { id: 'demo-1' }, cookie);
+  await expect(200, accept.status, 'accept with superadmin');
+
+  const reject = await req('POST', '/api/ai/opportunities/reject', { id: 'demo-1', reason: 'not now' }, cookie);
+  await expect(200, reject.status, 'reject with superadmin');
+
+  console.log('ai:opps:test OK');
+})().catch(err => {
+  console.error('ai:opps:test FAILED', err?.message || err);
+  process.exit(1);
+});
