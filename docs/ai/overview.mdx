@@ -1,0 +1,42 @@
+---
+title: AI Automation
+roles: [Superadmin, Admin]
+---
+
+## Overview
+AI Automation provides "OCR Bills" and "Predictive Insights". Superadmins/Admins can enable it under Settings → Appearance or Settings → AI.
+
+## How‑tos
+1. Turn on AI: Settings → Feature Flags → AI Automation.
+2. OCR a Bill: AI → OCR Bills → Upload → Review.
+3. Predict Insight: AI → Predictive Insights → Generate.
+4. Review Audit Logs: Settings → Audit → AI.
+5. Roll back a Theme: Settings → Appearance → History → Rollback.
+
+## Troubleshooting
+- No API key: Set OPENAI_API_KEY in env.
+- Token cap exceeded: Wait or reduce prompt size.
+- PII masked wrongly: Adjust masking rules in Settings.
+- Timeout: Try again; check network.
+- 403: You need Admin or Superadmin.
+
+## FAQs
+- Is data logged? Yes, anonymised with masking.
+- Can Staff use AI? Not by default.
+- Are prompts stored? Summaries only.
+- Can I export logs? Yes, CSV under Audit → AI.
+- How to disable? Toggle feature flag.
+- Rollback supported? Yes for themes.
+- Dark mode? Full parity.
+- Token cap? Enforced per request.
+- What models? Configurable via env.
+- Is training disabled? Yes by default.
+
+## Glossary
+- Token Cap: Max tokens per request.
+- PII Masking: Removing sensitive data.
+- Audit Trail: Record of actions.
+- Rollback: Revert to a previous state.
+- Preview: Visual check before apply.
+
+

@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { PrismaClient } from '@prisma/client';
+import { randomUUID } from 'node:crypto';
 
 const prisma = new PrismaClient();
 
@@ -7,7 +8,7 @@ async function ensureUser(email: string, role: string) {
   await prisma.eRPUser.upsert({
     where: { email },
     update: { role },
-    create: { id: crypto.randomUUID(), tenant_id: 't1', email, role, passwordHash: null },
+    create: { id: randomUUID(), tenant_id: 't1', email, role, passwordHash: null },
   });
 }
 
@@ -62,10 +63,10 @@ async function main() {
     await prisma.budget.create({ data: { orgId: 1, period: `2025-BILL-${i}`, account: '5000', amount: Math.round(Math.random()*3000+500) } });
   }
   for (let i=1;i<=25;i++) {
-    await prisma.fxRate.create({ data: { date: new Date(), base: 'GBP', ccy: pick(['USD','EUR']), rate: 1 + Math.random() } });
+    await prisma.fXRate.create({ data: { date: new Date(), base: 'GBP', ccy: pick(['USD','EUR']), rate: 1 + Math.random() } });
   }
   for (let i=1;i<=15;i++) {
-    await prisma.fxRate.create({ data: { date: new Date(), base: 'GBP', ccy: `BANK${i}`, rate: 1 } });
+    await prisma.fXRate.create({ data: { date: new Date(), base: 'GBP', ccy: `BANK${i}`, rate: 1 } });
   }
 
   // HR/Payroll: 15 Employees, 20 Payroll runs -> StaffMember + HelpGlossary entries

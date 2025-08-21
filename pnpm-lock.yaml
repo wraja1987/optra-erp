@@ -51,6 +51,9 @@ importers:
       puppeteer:
         specifier: ^23.7.1
         version: 23.11.1(typescript@5.9.2)
+      tsx:
+        specifier: ^4.20.4
+        version: 4.20.4
       typescript:
         specifier: ^5.5.4
         version: 5.9.2
@@ -10556,7 +10559,6 @@ snapshots:
       get-tsconfig: 4.10.1
     optionalDependencies:
       fsevents: 2.3.3
-    optional: true
 
   type-check@0.4.0:
     dependencies:

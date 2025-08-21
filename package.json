@@ -72,10 +72,11 @@
     "eslint-plugin-promise": "^6.4.0",
     "prettier": "^3.3.3",
     "prisma": "^6.14.0",
+    "puppeteer": "^23.7.1",
+    "tsx": "^4.20.4",
     "typescript": "^5.5.4",
     "vitest": "3.2.4",
-    "zod": "^3.23.8",
-    "puppeteer": "^23.7.1"
+    "zod": "^3.23.8"
   },
   "eslintConfig": {
     "env": {
