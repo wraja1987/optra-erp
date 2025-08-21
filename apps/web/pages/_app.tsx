@@ -11,6 +11,22 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, []);
 
+  // Load applied theme tokens (if any)
+  useEffect(() => {
+    async function loadTheme() {
+      try {
+        const res = await fetch('/theme.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const tokens = await res.json();
+        const root = document.documentElement.style as CSSStyleDeclaration;
+        for (const [k, v] of Object.entries(tokens || {})) {
+          root.setProperty(`--${k}`, String(v));
+        }
+      } catch {}
+    }
+    loadTheme();
+  }, []);
+
   return (
     <>
       <Head>
