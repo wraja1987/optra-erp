@@ -107,7 +107,13 @@ async function main() {
     await prisma.subscriptionPlan.upsert({ where: { code: `SHOPSKU${i}` }, update: {}, create: { code: `SHOPSKU${i}`, name: `Shopify Product ${i}`, priceMonthly: 10, currency: 'GBP' } });
   }
   for (let i=1;i<=10;i++) {
-    await prisma.activeSubscription.create({ data: { customerId: 1, planId: ((i%20)+1), status: 'OPEN', startDate: new Date() } });
+    const customerId = 1;
+    const planId = ((i%20)+1);
+    await prisma.activeSubscription.upsert({
+      where: { customerId_planId: { customerId, planId } },
+      update: { status: 'OPEN', startDate: new Date() },
+      create: { customerId, planId, status: 'OPEN', startDate: new Date() },
+    });
   }
 
   // Health/SLA: 10 uptime checks -> HelpReleaseNote entries as heartbeat
