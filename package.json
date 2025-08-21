@@ -59,7 +59,9 @@
     "docs:lint": "tsx scripts/docs/lint-docs.ts",
     "docs:build-index": "tsx scripts/docs/build-index.ts",
     "docs:sanitize": "tsx scripts/docs/check-mdx-sanitize.ts",
-    "gates:phase3": "node scripts/gates/phase3-runner.js"
+    "gates:phase3": "node scripts/gates/phase3-runner.js",
+    "ai:opps:refresh": "tsx scripts/ai/opportunities/refresh.ts --local --curated",
+    "ai:opps:test": "tsx scripts/ai/opportunities/test-suite.ts --fail-on-regressions"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",

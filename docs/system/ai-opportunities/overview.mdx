@@ -1,0 +1,43 @@
+---
+title: AI Opportunities
+role: superadmin
+module: system
+tags: [ai, opportunities]
+scenarios: [Refresh, Review, Plan, Accept/Reject, Audit, Safety]
+---
+
+## Overview
+AI Opportunities recommends new modules, integrations, and features. Superadmins can refresh suggestions, review details, create a plan, and accept or reject. All actions are audited.
+
+## How‑tos
+1. Refresh suggestions: System → AI Opportunities → Refresh.
+2. Filter the list: Use Category/Effort/Min value.
+3. Review details: Click a row to open the drawer.
+4. Create plan: Select an item → Create plan → Confirm to apply.
+5. Reject: Select an item → Reject → Enter reason.
+
+## Troubleshooting
+- Refresh denied: Check role and FEATURE_AI_OPPORTUNITIES=1.
+- Plan denied: Token cap exceeded; reduce prompt size.
+- Drawer not opening: Disable blockers and retry.
+- Missing audit: Check time filters.
+- 403: You must be Superadmin.
+
+## FAQs
+- Are prompts and outputs logged? Yes, with PII masking.
+- Can Staff/Admin access? Superadmin only.
+- Can I export to backlog? Roadmap integration planned.
+- Are token caps enforced? Yes via AI_OPPS_TOKEN_CAP.
+- What models are used? OpenAI when configured; stub otherwise.
+- Are suggestions safe? Reviewed; no silent mutations.
+- How often can I refresh? As needed; avoid spamming.
+- Can I customise categories? Yes in settings (Phase 4).
+- Is dark mode supported? Yes.
+- Is A11y checked? Yes via axe scripts.
+
+## Glossary
+- Opportunity: A potential feature/integration/module to add.
+- Plan: A one‑page plan with steps, risks, criteria.
+- Decision: Accepted or Rejected with reason.
+
+
