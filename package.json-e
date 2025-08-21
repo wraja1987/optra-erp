@@ -134,7 +134,7 @@
         "**/migrations/**",
         "**/apps/mobile/**",
         "**/apps/web/**",
-        "**/optra-erp/**"
+        "**/v5-ultra-erp/**"
       ],
       "thresholds": {
         "lines": 80,

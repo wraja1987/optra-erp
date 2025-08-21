@@ -5,7 +5,7 @@ function fail(s,e){ console.error(`FAIL: ${s}: ${e?.message||e}`); process.exitC
 
 (async()=>{
   try{
-    if(!fs.existsSync('optra-erp/apps/web/public/logo-optra.png')) throw new Error('logo-optra.png');
+    if(!fs.existsSync('v5-ultra-erp/apps/web/public/logo-optra.png')) throw new Error('logo-optra.png');
     ok('Branding asset present');
 
     const pkg = JSON.parse(fs.readFileSync('package.json','utf8'));

@@ -35,7 +35,7 @@ export default defineConfig({
         "coverage/**",
         "vitest.config.*",
         // nested repo if present
-        "optra-erp/**",
+        "v5-ultra-erp/**",
         // types/mocks
         "**/*.d.ts",
         "**/__mocks__/**"

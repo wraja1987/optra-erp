@@ -79,59 +79,59 @@
     "phase0": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase0 /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gate-phase0.cjs\n\nPASS: Monorepo scaffold\nPASS: Prisma schema valid\nPASS: CI pipeline\nPASS: Accessibility lint configured\nPASS: SoD block\nPASS: Tenant scoping\nPASS: AI defaults\nPASS: OpenAPI compiles\nPASS: Typecheck\nPASS: Unit tests\n"
+      "stdout": "\n> optra-erp@ gates:phase0 /Users/waheedraja/Projects/optra-erp\n> node scripts/gate-phase0.cjs\n\nPASS: Monorepo scaffold\nPASS: Prisma schema valid\nPASS: CI pipeline\nPASS: Accessibility lint configured\nPASS: SoD block\nPASS: Tenant scoping\nPASS: AI defaults\nPASS: OpenAPI compiles\nPASS: Typecheck\nPASS: Unit tests\n"
     },
     "phase1": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase1 /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gate-phase1.cjs\n\nPASS: Double-entry\nPASS: Period close block\nPASS: Adjustment mode\nPASS: Intercompany elimination\nPASS: Bank auto-match >=80%\nPASS: Payroll journals + AE\n"
+      "stdout": "\n> optra-erp@ gates:phase1 /Users/waheedraja/Projects/optra-erp\n> node scripts/gate-phase1.cjs\n\nPASS: Double-entry\nPASS: Period close block\nPASS: Adjustment mode\nPASS: Intercompany elimination\nPASS: Bank auto-match >=80%\nPASS: Payroll journals + AE\n"
     },
     "seedPhase2_first": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ seed:phase2 /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/seed-phase2.cjs\n\nPhase 2 seed complete\n"
+      "stdout": "\n> optra-erp@ seed:phase2 /Users/waheedraja/Projects/optra-erp\n> node scripts/seed-phase2.cjs\n\nPhase 2 seed complete\n"
     },
     "seedPhase2_second": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ seed:phase2 /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/seed-phase2.cjs\n\nPhase 2 seed complete\n"
+      "stdout": "\n> optra-erp@ seed:phase2 /Users/waheedraja/Projects/optra-erp\n> node scripts/seed-phase2.cjs\n\nPhase 2 seed complete\n"
     },
     "phase2": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase2 /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gate-phase2.cjs\n\nPASS: Branding asset present\nPASS: UI a11y scripts\nPASS: HelpDocs seeded\nPASS: Customers seeded\n"
+      "stdout": "\n> optra-erp@ gates:phase2 /Users/waheedraja/Projects/optra-erp\n> node scripts/gate-phase2.cjs\n\nPASS: Branding asset present\nPASS: UI a11y scripts\nPASS: HelpDocs seeded\nPASS: Customers seeded\n"
     },
     "phase2_auth": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase2:auth /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gates/phase2-auth.cjs\n\nPASS: Forgot Password DB token lifecycle\n"
+      "stdout": "\n> optra-erp@ gates:phase2:auth /Users/waheedraja/Projects/optra-erp\n> node scripts/gates/phase2-auth.cjs\n\nPASS: Forgot Password DB token lifecycle\n"
     },
     "phase2_helpdocs": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase2:helpdocs /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gates/phase2-helpdocs.cjs\n\nPASS: Help & Docs seeded and present\n"
+      "stdout": "\n> optra-erp@ gates:phase2:helpdocs /Users/waheedraja/Projects/optra-erp\n> node scripts/gates/phase2-helpdocs.cjs\n\nPASS: Help & Docs seeded and present\n"
     },
     "phase2_routes": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ gates:phase2:routes /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/gate-phase2-routes.cjs\n\nPASS: Sales Orders route 200\nPASS: Products route 200\nPASS: Customers Accounts route 200\n"
+      "stdout": "\n> optra-erp@ gates:phase2:routes /Users/waheedraja/Projects/optra-erp\n> node scripts/gate-phase2-routes.cjs\n\nPASS: Sales Orders route 200\nPASS: Products route 200\nPASS: Customers Accounts route 200\n"
     }
   },
   "accessibility": {
     "labels": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ ui:labels /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/ui-labels.cjs\n\nUI labels check stub\n"
+      "stdout": "\n> optra-erp@ ui:labels /Users/waheedraja/Projects/optra-erp\n> node scripts/ui-labels.cjs\n\nUI labels check stub\n"
     },
     "a11y_light": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ ui:a11y /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/ui-a11y.cjs\n\naxe-core light mode stub\n"
+      "stdout": "\n> optra-erp@ ui:a11y /Users/waheedraja/Projects/optra-erp\n> node scripts/ui-a11y.cjs\n\naxe-core light mode stub\n"
     },
     "a11y_dark": {
       "ok": true,
       "firstError": "",
-      "stdout": "\n> optra-erp@ ui:a11y:dark /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/ui-a11y-dark.cjs\n\naxe-core dark mode stub\n"
+      "stdout": "\n> optra-erp@ ui:a11y:dark /Users/waheedraja/Projects/optra-erp\n> node scripts/ui-a11y-dark.cjs\n\naxe-core dark mode stub\n"
     }
   },
   "tests": {
@@ -143,77 +143,77 @@
     },
     "bottom": [
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/devportal/devportal.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/devportal/devportal.service.js",
         "linePct": 100,
         "branchPct": 37.5
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/mfg/mrp.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/mfg/mrp.service.js",
         "linePct": 100,
         "branchPct": 40
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/clm/contracts.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/clm/contracts.service.js",
         "linePct": 100,
         "branchPct": 50
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/marketplace/skills.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/marketplace/skills.service.js",
         "linePct": 100,
         "branchPct": 50
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/analytics/scheduler.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/analytics/scheduler.service.js",
         "linePct": 100,
         "branchPct": 66.66666666666666
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/marketplace/manifest.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/marketplace/manifest.service.js",
         "linePct": 100,
         "branchPct": 66.66666666666666
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/treasury/treasury.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/treasury/treasury.service.js",
         "linePct": 100,
         "branchPct": 66.66666666666666
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/wms/inventory.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/wms/inventory.service.js",
         "linePct": 100,
         "branchPct": 72.72727272727273
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/packages/core/src/finance/bankImport.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/packages/core/src/finance/bankImport.js",
         "linePct": 100,
         "branchPct": 73.33333333333333
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/packages/core/src/finance/journalService.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/packages/core/src/finance/journalService.js",
         "linePct": 100,
         "branchPct": 73.68421052631578
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/mfg/genealogy.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/mfg/genealogy.service.js",
         "linePct": 100,
         "branchPct": 75
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/projects/billing.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/projects/billing.service.js",
         "linePct": 100,
         "branchPct": 75
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/auth/reset.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/auth/reset.service.js",
         "linePct": 100,
         "branchPct": 77.77777777777779
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/apps/api/src/mfg/bom.service.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/apps/api/src/mfg/bom.service.js",
         "linePct": 100,
         "branchPct": 80
       },
       {
-        "file": "/Users/waheedraja/Projects/v5-ultra-erp/packages/core/src/index.js",
+        "file": "/Users/waheedraja/Projects/optra-erp/packages/core/src/index.js",
         "linePct": 100,
         "branchPct": 87.5
       }
@@ -230,24 +230,24 @@
   },
   "perf": {
     "ok": true,
-    "stdout": "\n> optra-erp@ ui:perf /Users/waheedraja/Projects/v5-ultra-erp\n> node scripts/ui-perf.cjs\n\nUI performance stub: p95 and TBT placeholders\n"
+    "stdout": "\n> optra-erp@ ui:perf /Users/waheedraja/Projects/optra-erp\n> node scripts/ui-perf.cjs\n\nUI performance stub: p95 and TBT placeholders\n"
   },
   "screenshots": {
     "ran": true,
     "ok": true,
     "files": [
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/customers-accounts-dark-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/customers-accounts-dark-mobile.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/customers-accounts-light-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/customers-accounts-light-mobile.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/products-dark-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/products-dark-mobile.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/products-light-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/products-light-mobile.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/sales-orders-dark-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/sales-orders-dark-mobile.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/sales-orders-light-desktop.png",
-      "/Users/waheedraja/Projects/v5-ultra-erp/screenshots/sales-orders-light-mobile.png"
+      "/Users/waheedraja/Projects/optra-erp/screenshots/customers-accounts-dark-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/customers-accounts-dark-mobile.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/customers-accounts-light-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/customers-accounts-light-mobile.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/products-dark-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/products-dark-mobile.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/products-light-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/products-light-mobile.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/sales-orders-dark-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/sales-orders-dark-mobile.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/sales-orders-light-desktop.png",
+      "/Users/waheedraja/Projects/optra-erp/screenshots/sales-orders-light-mobile.png"
     ],
     "error": ""
   },

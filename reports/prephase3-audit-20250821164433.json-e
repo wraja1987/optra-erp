@@ -1,5 +1,5 @@
 {
-  "repo": "optra-erp",
+  "repo": "v5-ultra-erp",
   "branch": "phase-3",
   "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
   "db": { "host": "127.0.0.1", "port": 5433, "status": "reachable" },

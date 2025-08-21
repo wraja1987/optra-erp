@@ -8,7 +8,7 @@ docker compose up -d db redis >/dev/null || true
 
 # 1) Work out the DB container name (try new then old)
 DB_CTN="optra-erp-db-1"
-docker ps --format '{{.Names}}' | grep -q "^${DB_CTN}\$" || DB_CTN="optra-erp-db-1"
+docker ps --format '{{.Names}}' | grep -q "^${DB_CTN}\$" || DB_CTN="v5-ultra-erp-db-1"
 if ! docker ps --format '{{.Names}}' | grep -q "^${DB_CTN}\$"; then
   echo "✗ Could not find Postgres container. Make sure 'docker compose up -d' has started 'db'."
   exit 1

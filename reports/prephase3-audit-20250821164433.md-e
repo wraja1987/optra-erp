@@ -1,6 +1,6 @@
 # Pre‑Flight Audit (Phase 3 kickoff)
 
-- Repo: optra-erp
+- Repo: v5-ultra-erp
 - Branch: phase-3 (from rename/optra)
 - Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)
 
