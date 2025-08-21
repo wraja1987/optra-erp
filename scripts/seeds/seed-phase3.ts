@@ -74,7 +74,11 @@ async function main() {
     await prisma.staffMember.upsert({ where: { email: `employee${i}@example.com` }, update: {}, create: { name: `Employee ${i}`, email: `employee${i}@example.com`, niLetter: 'A', taxCode: '1257L' } });
   }
   for (let i=1;i<=20;i++) {
-    await prisma.helpGlossary.create({ data: { term: `PAYRUN-${i}`, definition: 'Payroll run placeholder' } });
+    await prisma.helpGlossary.upsert({
+      where: { term: `PAYRUN-${i}` },
+      update: { definition: 'Payroll run placeholder' },
+      create: { term: `PAYRUN-${i}`, definition: 'Payroll run placeholder' },
+    });
   }
 
   // Projects/Tasks
