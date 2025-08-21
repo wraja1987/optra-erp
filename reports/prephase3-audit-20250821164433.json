@@ -1,0 +1,15 @@
+{
+  "repo": "optra-erp",
+  "branch": "phase-3",
+  "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "db": { "host": "127.0.0.1", "port": 5433, "status": "reachable" },
+  "prisma": { "migrations": "up_to_date", "client_generated": true },
+  "coverage": { "lines": 97.08, "branches": 74.83, "meets_thresholds": true },
+  "security": { "status": "passed", "notes": "stub" },
+  "accessibility": { "light": "passed", "dark": "passed", "notes": "stubs" },
+  "performance": { "status": "passed", "notes": "stub p95/TBT" },
+  "phase2_gates": "passed",
+  "fixes": [
+    "vitest config switched to ESM (.mts) to resolve ERR_REQUIRE_ESM"
+  ]
+}

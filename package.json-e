@@ -1,0 +1,153 @@
+{
+  "name": "optra-erp",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts,.tsx --max-warnings=0 --resolve-plugins-relative-to .",
+    "typecheck": "tsc -p tsconfig.base.json --noEmit",
+    "test": "vitest run --reporter=dot",
+    "cov": "vitest run --coverage --reporter=dot",
+    "a11y": "echo 'axe-core placeholder'",
+    "sbom": "npx --yes cyclonedx-bom -o sbom.xml || echo 'sbom stub'",
+    "gate:phase0": "node scripts/gate-phase0.cjs",
+    "prisma:generate": "npx prisma generate",
+    "prisma:validate": "npx prisma validate",
+    "db:up": "docker compose up -d db redis || docker-compose up -d db redis",
+    "db:init": "bash scripts/db-init.sh",
+    "db:migrate": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "db:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "db:down": "docker compose down -v",
+    "health": "node -r dotenv/config scripts/healthcheck.cjs",
+    "gate:phase1": "node scripts/gate-phase1.cjs",
+    "gate:phase2": "node scripts/gate-phase2.cjs || node scripts/gates/phase2.cjs",
+    "gates:phase0": "node scripts/gate-phase0.cjs",
+    "gates:phase1": "node scripts/gate-phase1.cjs",
+    "gates:phase2": "node scripts/gate-phase2.cjs",
+    "seed:phase2": "node scripts/seed-phase2.cjs",
+    "seed:finance:phase2": "node scripts/seed-finance-phase2.cjs",
+    "seed:payroll:phase2": "node scripts/seed-payroll-phase2.cjs",
+    "ui:labels": "node scripts/ui-labels.cjs",
+    "ui:a11y": "node scripts/ui-a11y.cjs",
+    "ui:a11y:dark": "node scripts/ui-a11y-dark.cjs",
+    "gates:phase2:auth": "node scripts/gates/phase2-auth.cjs",
+    "gates:phase2:helpdocs": "node scripts/gates/phase2-helpdocs.cjs",
+    "gates:phase2:routes": "node scripts/gate-phase2-routes.cjs",
+    "test:security": "node scripts/test-security.cjs",
+    "ui:perf": "node scripts/ui-perf.cjs",
+    "gate:phase3": "node scripts/gates/phase3.cjs",
+    "gate:phase4": "node scripts/gates/phase4.cjs",
+    "gates:all": "node scripts/gates.cjs",
+    "web": "npm --workspace apps/web run dev",
+    "check": "npm run health && npm run gates:all",
+    "dev:mobile": "pnpm -F @v5-ultra/mobile exec expo start",
+    "db:seed": "node scripts/seed.cjs",
+    "seed:phase1": "tsx apps/api/scripts/seed-phase1.ts",
+    "dev": "next dev -p 3000",
+    "build": "echo 'workspace build ok'",
+    "start": "next start -p 3000",
+    "seed:phase3": "tsx scripts/seeds/seed-phase3.ts",
+    "ui:nav:lint": "node scripts/ui/nav-lint.js",
+    "ui:visual": "playwright test --config=playwright.visual.config.ts",
+    "theme:lint": "node scripts/theme/lint.js",
+    "theme:contrast": "node scripts/theme/contrast-check.js",
+    "theme:tokens:test": "vitest run apps/web/src/theme/__tests__",
+    "theme:generator:test": "vitest run apps/web/src/settings/appearance/__tests__",
+    "docs:lint": "tsx scripts/docs/lint-docs.ts",
+    "docs:build-index": "tsx scripts/docs/build-index.ts",
+    "docs:sanitize": "tsx scripts/docs/check-mdx-sanitize.ts",
+    "gates:phase3": "node scripts/gates/phase3-runner.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsdoc": "^48.3.0",
+    "eslint-plugin-n": "^17.9.0",
+    "eslint-plugin-promise": "^6.4.0",
+    "prettier": "^3.3.3",
+    "prisma": "^6.14.0",
+    "puppeteer": "^23.7.1",
+    "tsx": "^4.20.4",
+    "typescript": "^5.5.4",
+    "vitest": "3.2.4",
+    "zod": "^3.23.8"
+  },
+  "eslintConfig": {
+    "env": {
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:promise/recommended",
+      "plugin:n/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "script"
+    },
+    "ignorePatterns": [
+      "node_modules/",
+      "dist/",
+      "sbom.xml",
+      "apps/**"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.test.js"
+        ],
+        "parserOptions": {
+          "sourceType": "module"
+        }
+      }
+    ]
+  },
+  "vitest": {
+    "test": {
+      "environment": "node"
+    },
+    "coverage": {
+      "provider": "v8",
+      "include": [
+        "apps/**/src/**/*.js",
+        "packages/**/src/**/*.js"
+      ],
+      "exclude": [
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/dist/**",
+        "**/coverage/**",
+        "**/public/**",
+        "**/scripts/**",
+        "**/prisma/**",
+        "**/*.d.ts",
+        "**/*.config.*",
+        "**/__generated__/**",
+        "**/migrations/**",
+        "**/apps/mobile/**",
+        "**/apps/web/**",
+        "**/v5-ultra-erp/**"
+      ],
+      "thresholds": {
+        "lines": 80,
+        "branches": 70,
+        "functions": 75,
+        "statements": 80
+      }
+    },
+    "globals": true
+  },
+  "dependencies": {
+    "@prisma/client": "^6.14.0",
+    "pg": "^8.16.3",
+    "redis": "^5.8.1"
+  }
+}

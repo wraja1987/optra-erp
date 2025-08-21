@@ -1,0 +1,5 @@
+vitest.config.ts
+**/*.config.ts
+coverage/**
+reports/**
+scripts/**

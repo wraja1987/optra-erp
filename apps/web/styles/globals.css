@@ -1,0 +1,8 @@
+:root { --bg:#ffffff; --fg:#0b0d14; --card:#f8fafc; --border:#e1e6ef; }
+[data-theme="dark"] { --bg:#0b0d14; --fg:#e7ecf3; --card:#121723; --border:#22304a; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+a { color:#0b5fff; }
+button:focus, a:focus { outline: 2px solid #0b5fff; outline-offset: 2px; }
+
+
