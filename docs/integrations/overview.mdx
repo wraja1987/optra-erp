@@ -1,0 +1,45 @@
+---
+title: Integrations
+role: admin
+module: integrations
+tags: [feeds, exports, shopify]
+scenarios: [Productivity Feeds, CSV Exports, Shopify Pilot]
+---
+
+## Overview
+Integrations connect Optra to external tools. Admins enable and manage feeds/exports and the Shopify pilot. Staff may view status where permitted.
+
+## How‑tos
+1. Enable a feed: Go to Integrations → Feeds → Add → Save.
+2. Schedule an export: Integrations → Exports → New → CSV → Confirm.
+3. Connect Shopify: Integrations → Shopify Pilot → Connect → Enter API keys.
+4. Test a webhook: Integrations → Feeds → Test → Verify 200.
+5. Export orders: Exports → Sales Orders → CSV → Download.
+
+## Troubleshooting
+- Feed failing: Check credentials and endpoint availability.
+- Export empty: Confirm date filters and permissions.
+- Shopify sync slow: Reduce batch size and retry.
+- 403 on settings: You need Admin or Superadmin.
+- CSV garbled: Ensure UTF‑8 and correct delimiter.
+
+## FAQs
+- Can Staff run exports? No, Admin only.
+- How often can feeds run? As scheduled; avoid sub‑minute.
+- Are API keys encrypted? Yes, secrets are stored securely.
+- Can I revoke access? Yes, disable or delete connections.
+- Is Shopify two‑way? Pilot is import‑first.
+- Do exports include headers? Yes by default.
+- Can I customise fields? Use export mappings.
+- Are failures alerted? Use email alerts under Integrations.
+- Are retries automatic? Yes, limited retries.
+- Is audit logging enabled? Yes for all changes.
+
+## Glossary
+- Feed: Automated import from an external system.
+- Export: File or API delivery to an external destination.
+- Mapping: Field‑to‑field conversion for data.
+- Secret: Encrypted credential used by a connection.
+- Pilot: Limited scope early integration.
+
+

@@ -1,0 +1,43 @@
+---
+title: Global
+role: admin
+module: global
+tags: [entity switcher, consolidation]
+scenarios: [Multi‑company, Consolidation]
+---
+
+## Overview
+Global covers multi‑company operation: the Entity Switcher and a consolidation stub for combined reporting.
+
+## How‑tos
+1. Switch entity: Global → Entity Switcher → Select company.
+2. Pin a favourite: Entity Switcher → Pin.
+3. Create a consolidation run: Global → Consolidation → New.
+4. Review intercompany eliminations: Consolidation → Review.
+5. Export consolidation: Consolidation → Export CSV.
+
+## Troubleshooting
+- Missing entity: Check permissions.
+- Wrong currency: Confirm base currency on Organisation.
+- Consolidation blocked: Ensure periods are open.
+- Switcher not updating: Refresh and re‑select.
+- Export fails: Try a smaller date range.
+
+## FAQs
+- Who can switch entities? Admin and Superadmin.
+- Is consolidation automated? Stub provides manual steps.
+- Are eliminations posted? In Phase 4.
+- Does switch affect API calls? Yes, scoped to selected entity.
+- Can Staff access Global? Read‑only when permitted.
+- Is audit logging enabled? Yes for switches and runs.
+- Can I undo a switch? Yes, select a different entity.
+- How many entities? No enforced limit.
+- Multi‑currency? Supported.
+- Intercompany? Tracked for eliminations.
+
+## Glossary
+- Entity: A company within the group.
+- Consolidation: Combining results across entities.
+- Elimination: Removal of intra‑group transactions.
+
+

@@ -1,0 +1,43 @@
+---
+title: System
+role: superadmin
+module: system
+tags: [health, sla, config promotion, siem, data retention]
+scenarios: [SLA & Health, Config Promotion, SIEM Export, Data Retention]
+---
+
+## Overview
+System is for Superadmins. Monitor Health/SLA, promote configurations, export to SIEM, and manage data retention.
+
+## How‑tos
+1. View Health: System → Health/SLA.
+2. Promote config: System → Config Promotion → Promote.
+3. Export SIEM: System → SIEM Export → Generate.
+4. Update retention: System → Data Retention → Save.
+5. Review audit: Settings → Audit → System.
+
+## Troubleshooting
+- Health red: Investigate checks; see logs.
+- Promotion blocked: Ensure tests pass.
+- SIEM export large: Use date filters.
+- Retention denied: Superadmin only.
+- Missing audit: Check filters and time.
+
+## FAQs
+- Who can access System? Superadmin only.
+- Are exports encrypted? Yes at rest and in transit.
+- Can I schedule exports? Yes via cron.
+- What’s retained? As per policy.
+- Are changes logged? Yes.
+- Do we notify outages? Via alerts.
+- Is rollback supported? Yes for configs.
+- Dark mode? Supported.
+- Accessibility? Checked with axe.
+- Performance budgets? Enforced.
+
+## Glossary
+- SLA: Service‑level agreement.
+- Config Promotion: Moving settings between environments.
+- SIEM: Security information and event management.
+
+
