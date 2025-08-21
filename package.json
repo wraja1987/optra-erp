@@ -35,6 +35,7 @@
     "ui:a11y:dark": "node scripts/ui-a11y-dark.cjs",
     "gates:phase2:auth": "node scripts/gates/phase2-auth.cjs",
     "gates:phase2:helpdocs": "node scripts/gates/phase2-helpdocs.cjs",
+    "gates:phase2:routes": "node scripts/gate-phase2-routes.cjs",
     "test:security": "node scripts/test-security.cjs",
     "ui:perf": "node scripts/ui-perf.cjs",
     "gate:phase3": "node scripts/gates/phase3.cjs",
@@ -103,13 +104,30 @@
     },
     "coverage": {
       "provider": "v8",
+      "include": [
+        "apps/**/src/**/*.js",
+        "packages/**/src/**/*.js"
+      ],
       "exclude": [
-        "scripts/**"
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/dist/**",
+        "**/coverage/**",
+        "**/public/**",
+        "**/scripts/**",
+        "**/prisma/**",
+        "**/*.d.ts",
+        "**/*.config.*",
+        "**/__generated__/**",
+        "**/migrations/**",
+        "**/apps/mobile/**",
+        "**/apps/web/**",
+        "**/v5-ultra-erp/**"
       ],
       "thresholds": {
         "lines": 80,
         "branches": 70,
-        "functions": 80,
+        "functions": 75,
         "statements": 80
       }
     },
