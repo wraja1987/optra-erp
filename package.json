@@ -48,7 +48,18 @@
     "seed:phase1": "tsx apps/api/scripts/seed-phase1.ts",
     "dev": "next dev -p 3000",
     "build": "echo 'workspace build ok'",
-    "start": "next start -p 3000"
+    "start": "next start -p 3000",
+    "seed:phase3": "tsx scripts/seeds/seed-phase3.ts",
+    "ui:nav:lint": "node scripts/ui/nav-lint.js",
+    "ui:visual": "playwright test --config=playwright.visual.config.ts",
+    "theme:lint": "node scripts/theme/lint.js",
+    "theme:contrast": "node scripts/theme/contrast-check.js",
+    "theme:tokens:test": "vitest run apps/web/src/theme/__tests__",
+    "theme:generator:test": "vitest run apps/web/src/settings/appearance/__tests__",
+    "docs:lint": "tsx scripts/docs/lint-docs.ts",
+    "docs:build-index": "tsx scripts/docs/build-index.ts",
+    "docs:sanitize": "tsx scripts/docs/check-mdx-sanitize.ts",
+    "gates:phase3": "node scripts/gates/phase3-runner.js"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
