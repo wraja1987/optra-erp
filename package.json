@@ -26,7 +26,8 @@
     "gates:all": "npm run gate:phase0 && npm run gate:phase1 && npm run gate:phase2 && npm run gate:phase3 && npm run gate:phase4",
     "web": "npm --workspace apps/web run dev",
     "check": "npm run health && npm run gates:all",
-    "build": "pnpm -r run build"
+    "build": "pnpm -r run build",
+    "dev:web": "pnpm --filter web dev"
   },
   "devDependencies": {
     "@types/node": "^20.14.11",
