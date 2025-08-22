@@ -1,5 +1,5 @@
 {
-  "name": "v5-ultra-erp",
+  "name": "optra-erp",
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "workspaces": [
