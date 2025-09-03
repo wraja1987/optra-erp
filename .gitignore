@@ -11,3 +11,8 @@ coverage/
 *.log
 .env
 node_modules/
+.expo/
+
+.env.local
+*.env.local
+apps/web/.env.local
